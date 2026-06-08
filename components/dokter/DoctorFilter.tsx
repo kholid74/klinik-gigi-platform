@@ -34,7 +34,7 @@ export function DoctorFilter({ doctors }: { doctors: Doctor[] }) {
           <div key={doc.id} className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
             <div className="h-60 bg-[var(--color-brand-light)] relative overflow-hidden">
               {doc.photo_url ? (
-                <Image src={doc.photo_url} alt={doc.name} fill className="object-cover object-top" />
+                <Image src={doc.photo_url} alt={doc.name} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-cover object-top" />
               ) : (
                 <div className="absolute inset-0 flex items-center justify-center">
                   <span className="font-display text-7xl text-[var(--color-brand-primary)]/20">

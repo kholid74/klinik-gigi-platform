@@ -45,7 +45,7 @@ export function PromoFilter({ promos }: { promos: Promo[] }) {
             {/* Image */}
             <div className="md:w-2/5 h-56 md:h-auto relative overflow-hidden bg-[var(--color-brand-light)]" style={{ background: 'linear-gradient(135deg, var(--color-brand-primary), var(--color-brand-secondary))' }}>
               {featured.image_url && (
-                <Image src={featured.image_url} alt={featured.title} fill className="object-cover" />
+                <Image src={featured.image_url} alt={featured.title} fill sizes="(max-width: 768px) 100vw, 40vw" className="object-cover" />
               )}
             </div>
             {/* Body */}
@@ -112,7 +112,7 @@ export function PromoFilter({ promos }: { promos: Promo[] }) {
             <div key={promo.id} className={`bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow ${promo.status === 'berakhir' ? 'opacity-65 grayscale-[40%]' : ''}`}>
               {/* Image */}
               <div className="h-48 relative overflow-hidden bg-[var(--color-brand-light)]" style={{ background: 'linear-gradient(135deg, var(--color-brand-primary), var(--color-brand-secondary))' }}>
-                {promo.image_url && <Image src={promo.image_url} alt={promo.title} fill className="object-cover" />}
+                {promo.image_url && <Image src={promo.image_url} alt={promo.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-cover" />}
                 {/* Badges */}
                 <div className="absolute top-3 right-3">
                   <span className={`text-xs font-bold text-white px-3 py-1 rounded-full ${promo.status === 'aktif' ? 'bg-[var(--color-brand-cta)]' : promo.status === 'member' ? 'bg-purple-600' : 'bg-gray-500'}`}>

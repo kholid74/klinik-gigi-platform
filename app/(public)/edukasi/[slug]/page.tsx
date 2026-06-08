@@ -56,7 +56,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             <article className="bg-white rounded-2xl overflow-hidden shadow-sm">
               {article.thumbnail_url && (
                 <div className="h-72 md:h-96 relative overflow-hidden">
-                  <Image src={article.thumbnail_url} alt={article.title} fill className="object-cover" />
+                  <Image src={article.thumbnail_url} alt={article.title} fill sizes="(max-width: 768px) 100vw, 800px" className="object-cover" />
                 </div>
               )}
 
@@ -117,7 +117,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                       <Link key={a.id} href={`/edukasi/${a.slug}`} className="flex gap-3 group">
                         <div className="w-16 h-16 rounded-lg overflow-hidden bg-[var(--color-brand-light)] shrink-0 relative">
                           {a.thumbnail_url && (
-                            <Image src={a.thumbnail_url} alt={a.title} fill className="object-cover" />
+                            <Image src={a.thumbnail_url} alt={a.title} fill sizes="64px" className="object-cover" />
                           )}
                         </div>
                         <div className="flex-1 min-w-0">

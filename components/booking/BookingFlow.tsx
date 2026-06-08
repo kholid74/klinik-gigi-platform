@@ -80,7 +80,7 @@ function StepDoctor({ doctors }: { doctors: Doctor[] }) {
             <div className="flex items-center gap-4">
               <div className="w-14 h-14 rounded-full overflow-hidden bg-[var(--color-brand-light)] shrink-0 relative">
                 {doc.photo_url ? (
-                  <Image src={doc.photo_url} alt={doc.name} fill className="object-cover" />
+                  <Image src={doc.photo_url} alt={doc.name} fill sizes="56px" className="object-cover" />
                 ) : (
                   <div className="absolute inset-0 flex items-center justify-center text-2xl">👨‍⚕️</div>
                 )}

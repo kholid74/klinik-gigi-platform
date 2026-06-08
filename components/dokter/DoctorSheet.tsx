@@ -24,7 +24,7 @@ export function DoctorSheet({
       <div className="flex gap-4 items-center mb-6">
         <div className="w-20 h-20 rounded-2xl overflow-hidden bg-[var(--color-brand-light)] shrink-0 relative">
           {doctor.photo_url ? (
-            <Image src={doctor.photo_url} alt={doctor.name} fill className="object-cover object-top" />
+            <Image src={doctor.photo_url} alt={doctor.name} fill sizes="80px" className="object-cover object-top" />
           ) : (
             <div className="absolute inset-0 flex items-center justify-center font-display text-3xl text-[var(--color-brand-primary)]/30">
               {doctor.name.split(' ').at(-1)?.[0]}

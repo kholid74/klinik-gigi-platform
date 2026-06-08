@@ -104,7 +104,7 @@ export function DokterManager({ doctors }: { doctors: Doctor[] }) {
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-full overflow-hidden bg-[var(--color-brand-light)] shrink-0 relative">
                   {d.photo_url
-                    ? <Image src={d.photo_url} alt={d.name} fill className="object-cover" />
+                    ? <Image src={d.photo_url} alt={d.name} fill sizes="36px" className="object-cover" />
                     : <div className="absolute inset-0 flex items-center justify-center text-base">👨‍⚕️</div>}
                 </div>
                 <div>
