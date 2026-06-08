@@ -13,7 +13,7 @@ INSERT INTO doctors (id, name, slug, specialty, bio, education, certifications, 
   'Dokter gigi spesialis konservasi dengan pengalaman 12 tahun. Ahli dalam perawatan saluran akar, tambalan estetik, dan restorasi mahkota.',
   ARRAY['S1 Kedokteran Gigi – Universitas Padjadjaran (2008)', 'Sp.KG – Universitas Indonesia (2013)'],
   ARRAY['Anggota PDGI', 'Sertifikasi Endodontik Lanjutan', 'Pelatihan CAD/CAM Dental'],
-  NULL
+  'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=600&h=600&fit=crop&crop=face'
 ),
 (
   'a1b2c3d4-0002-0000-0000-000000000002',
@@ -23,7 +23,7 @@ INSERT INTO doctors (id, name, slug, specialty, bio, education, certifications, 
   'Spesialis ortodonti dengan keahlian dalam perawatan behel konvensional dan clear aligner. Telah menangani lebih dari 800 kasus maloklusi.',
   ARRAY['S1 Kedokteran Gigi – Universitas Gadjah Mada (2006)', 'Sp.Ort – Universitas Airlangga (2011)'],
   ARRAY['Anggota IKORTI', 'Certified Invisalign Provider', 'Pelatihan Damon System'],
-  NULL
+  'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=600&h=600&fit=crop&crop=face'
 ),
 (
   'a1b2c3d4-0003-0000-0000-000000000003',
@@ -33,7 +33,7 @@ INSERT INTO doctors (id, name, slug, specialty, bio, education, certifications, 
   'Spesialis bedah mulut yang berpengalaman dalam pencabutan gigi bungsu, implan gigi, dan bedah tulang rahang.',
   ARRAY['S1 Kedokteran Gigi – Universitas Padjadjaran (2010)', 'Sp.BM – Universitas Indonesia (2015)'],
   ARRAY['Anggota PABMI', 'Sertifikasi Implan Gigi Nobel Biocare', 'ATLS Certification'],
-  NULL
+  'https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=600&h=600&fit=crop&crop=face'
 ),
 (
   'a1b2c3d4-0004-0000-0000-000000000004',
@@ -43,7 +43,7 @@ INSERT INTO doctors (id, name, slug, specialty, bio, education, certifications, 
   'Dokter gigi umum dengan pengalaman 8 tahun. Berfokus pada pemeriksaan rutin, scaling, dan edukasi kesehatan gigi bagi pasien semua usia.',
   ARRAY['S1 Kedokteran Gigi – Universitas Padjadjaran (2014)'],
   ARRAY['Anggota PDGI', 'Pelatihan Aesthetic Dentistry'],
-  NULL
+  'https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=600&h=600&fit=crop&crop=face'
 ),
 (
   'a1b2c3d4-0005-0000-0000-000000000005',
@@ -53,7 +53,7 @@ INSERT INTO doctors (id, name, slug, specialty, bio, education, certifications, 
   'Spesialis gigi anak yang ramah dan sabar. Ahli dalam menangani pasien anak dengan pendekatan bermain untuk mengurangi rasa takut.',
   ARRAY['S1 Kedokteran Gigi – Universitas Trisakti (2011)', 'Sp.KGA – Universitas Padjadjaran (2016)'],
   ARRAY['Anggota IDGAI', 'Pelatihan Pedodonti Behavior Management', 'Sertifikasi Fluoride Therapy'],
-  NULL
+  'https://images.unsplash.com/photo-1571772996211-2f02c9727629?w=600&h=600&fit=crop&crop=face'
 ),
 (
   'a1b2c3d4-0006-0000-0000-000000000006',
@@ -61,9 +61,9 @@ INSERT INTO doctors (id, name, slug, specialty, bio, education, certifications, 
   'hendra-wijaya',
   'Periodonti',
   'Spesialis periodonti yang menangani penyakit gusi dan jaringan pendukung gigi. Ahli dalam scaling deep, kuretase, dan cangkok gusi.',
-  ARRAY['S1 Kedokteran Gigi – Universitas Diponegoro (2009)', 'Sp.Perio – Universitas Airlangga (2014)'],
+  ARRAY['S1 Kedokteran Gigi – Universitas Padjadjaran (2009)', 'Sp.Perio – Universitas Airlangga (2014)'],
   ARRAY['Anggota PDGI', 'Anggota ISPG', 'Pelatihan Laser Periodontal Therapy'],
-  NULL
+  'https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=600&h=600&fit=crop&crop=face'
 );
 
 -- ─── DOCTOR SCHEDULES ─────────────────────────────────
@@ -240,46 +240,60 @@ INSERT INTO promos (title, slug, description, promo_code, discount_type, discoun
 );
 
 -- ─── ARTICLES ─────────────────────────────────────────
-INSERT INTO articles (title, slug, excerpt, category, author, read_time_mins, is_featured, is_published, published_at) VALUES
+INSERT INTO articles (title, slug, excerpt, category, author, read_time_mins, thumbnail_url, is_featured, is_published, published_at) VALUES
 (
   'Mengenal Karies Gigi: Penyebab, Gejala, dan Cara Mencegahnya',
   'mengenal-karies-gigi',
   'Karies atau gigi berlubang adalah masalah gigi yang paling umum terjadi. Pelajari penyebab, gejala, dan cara efektif mencegahnya sejak dini.',
-  'perawatan', 'drg. Arif Setiawan', 6, true, true, NOW() - INTERVAL '3 days'
+  'perawatan', 'drg. Arif Setiawan', 6,
+  'https://images.unsplash.com/photo-1588776814546-1ffbb172c7a5?w=800&h=450&fit=crop',
+  true, true, NOW() - INTERVAL '3 days'
 ),
 (
   'Kapan Waktu yang Tepat Membawa Anak ke Dokter Gigi untuk Pertama Kali?',
   'waktu-tepat-anak-ke-dokter-gigi',
   'Banyak orang tua yang masih ragu kapan harus membawa anak ke dokter gigi. Jawabannya mungkin lebih awal dari yang Anda kira.',
-  'anak', 'drg. Siti Nurhaliza, Sp.KGA', 5, false, true, NOW() - INTERVAL '7 days'
+  'anak', 'drg. Siti Nurhaliza, Sp.KGA', 5,
+  'https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=800&h=450&fit=crop',
+  false, true, NOW() - INTERVAL '7 days'
 ),
 (
   'Teeth Whitening di Klinik vs di Rumah: Mana yang Lebih Aman?',
   'teeth-whitening-klinik-vs-rumah',
   'Di pasaran banyak produk pemutih gigi yang bisa dipakai sendiri di rumah. Apakah seaman prosedur profesional di klinik?',
-  'estetik', 'drg. Rina Safitri, Sp.KG', 7, false, true, NOW() - INTERVAL '12 days'
+  'estetik', 'drg. Rina Safitri, Sp.KG', 7,
+  'https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=800&h=450&fit=crop',
+  false, true, NOW() - INTERVAL '12 days'
 ),
 (
   '5 Makanan yang Tanpa Sadar Merusak Gigi Anda Setiap Hari',
   '5-makanan-merusak-gigi',
   'Beberapa makanan yang kita konsumsi sehari-hari ternyata bisa merusak email gigi tanpa kita sadari. Cek daftarnya di sini.',
-  'nutrisi', 'Tim Senyum Sehat', 4, false, true, NOW() - INTERVAL '18 days'
+  'nutrisi', 'Tim Senyum Sehat', 4,
+  'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&h=450&fit=crop',
+  false, true, NOW() - INTERVAL '18 days'
 ),
 (
   'Kenapa Napas Bau Meski Sudah Gosok Gigi? Ini Penyebabnya',
   'penyebab-napas-bau',
   'Bau mulut atau halitosis bisa disebabkan banyak faktor, bukan hanya kebersihan gigi. Pelajari penyebab dan solusinya.',
-  'tips', 'drg. Hendra Wijaya, Sp.Perio', 5, false, true, NOW() - INTERVAL '25 days'
+  'tips', 'drg. Hendra Wijaya, Sp.Perio', 5,
+  'https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800&h=450&fit=crop',
+  false, true, NOW() - INTERVAL '25 days'
 ),
 (
   'Panduan Lengkap Flossing: Teknik yang Benar untuk Gigi Bersih Optimal',
   'panduan-flossing-benar',
   'Flossing adalah bagian penting dari rutinitas kebersihan gigi yang sering diabaikan. Pelajari teknik yang benar agar hasilnya maksimal.',
-  'tips', 'Tim Senyum Sehat', 4, false, true, NOW() - INTERVAL '32 days'
+  'tips', 'Tim Senyum Sehat', 4,
+  'https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=800&h=450&fit=crop',
+  false, true, NOW() - INTERVAL '32 days'
 ),
 (
   'Behel vs Clear Aligner: Pilih yang Mana untuk Gigi Rapi?',
   'behel-vs-clear-aligner',
   'Ingin gigi rapi tapi bingung pilih behel konvensional atau clear aligner? Berikut perbandingan lengkap keduanya untuk membantu keputusan Anda.',
-  'estetik', 'drg. Budi Hartono, Sp.Ort', 8, false, true, NOW() - INTERVAL '40 days'
+  'estetik', 'drg. Budi Hartono, Sp.Ort', 8,
+  'https://images.unsplash.com/photo-1607346256330-dee7af15f7c5?w=800&h=450&fit=crop',
+  false, true, NOW() - INTERVAL '40 days'
 );
