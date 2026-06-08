@@ -1,4 +1,4 @@
-import { createClient } from '@/lib/supabase/server'
+import { createStaticClient } from '@/lib/supabase/static'
 import type { Service, ServiceCategory } from '@/types'
 
 export async function getServices(filters?: {
@@ -7,7 +7,7 @@ export async function getServices(filters?: {
   limit?: number
 }): Promise<Service[]> {
   try {
-    const supabase = await createClient()
+    const supabase = createStaticClient()
     let query = supabase
       .from('services')
       .select('*')
@@ -27,7 +27,7 @@ export async function getServices(filters?: {
 
 export async function getServiceBySlug(slug: string): Promise<Service | null> {
   try {
-    const supabase = await createClient()
+    const supabase = createStaticClient()
     const { data, error } = await supabase
       .from('services')
       .select('*')

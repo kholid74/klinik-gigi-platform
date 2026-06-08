@@ -1,4 +1,4 @@
-import { createClient } from '@/lib/supabase/server'
+import { createStaticClient } from '@/lib/supabase/static'
 import type { Promo, PromoStatus } from '@/types'
 
 export async function getPromos(filters?: {
@@ -7,7 +7,7 @@ export async function getPromos(filters?: {
   limit?: number
 }): Promise<Promo[]> {
   try {
-    const supabase = await createClient()
+    const supabase = createStaticClient()
     let query = supabase
       .from('promos_with_status')
       .select('*')

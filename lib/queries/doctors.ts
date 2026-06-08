@@ -1,4 +1,4 @@
-import { createClient } from '@/lib/supabase/server'
+import { createStaticClient } from '@/lib/supabase/static'
 import type { Doctor, DoctorSchedule, TimeSlot } from '@/types'
 
 export async function getDoctors(filters?: {
@@ -7,7 +7,7 @@ export async function getDoctors(filters?: {
   limit?: number
 }): Promise<Doctor[]> {
   try {
-    const supabase = await createClient()
+    const supabase = createStaticClient()
     let query = supabase
       .from('doctors')
       .select('id, name, slug, specialty, bio, education, certifications, photo_url, is_active')
@@ -27,7 +27,7 @@ export async function getDoctors(filters?: {
 
 export async function getDoctorBySlug(slug: string): Promise<Doctor | null> {
   try {
-    const supabase = await createClient()
+    const supabase = createStaticClient()
     const { data, error } = await supabase
       .from('doctors')
       .select('*')
@@ -44,7 +44,7 @@ export async function getDoctorBySlug(slug: string): Promise<Doctor | null> {
 
 export async function getDoctorSchedules(doctorId: string): Promise<DoctorSchedule[]> {
   try {
-    const supabase = await createClient()
+    const supabase = createStaticClient()
     const { data, error } = await supabase
       .from('doctor_schedules')
       .select('*')
@@ -66,7 +66,7 @@ export async function getDoctorAvailableSlots(
   date: string,
 ): Promise<TimeSlot[]> {
   try {
-    const supabase = await createClient()
+    const supabase = createStaticClient()
     const dayOfWeek = new Date(date).getDay()
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

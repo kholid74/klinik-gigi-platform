@@ -1,4 +1,4 @@
-import { createClient } from '@/lib/supabase/server'
+import { createStaticClient } from '@/lib/supabase/static'
 import type { Article, ArticleCategory } from '@/types'
 
 export async function getArticles(filters?: {
@@ -8,7 +8,7 @@ export async function getArticles(filters?: {
   offset?: number
 }): Promise<Article[]> {
   try {
-    const supabase = await createClient()
+    const supabase = createStaticClient()
     let query = supabase
       .from('articles')
       .select('id, title, slug, excerpt, category, thumbnail_url, author, read_time_mins, is_featured, published_at, created_at')
@@ -30,7 +30,7 @@ export async function getArticles(filters?: {
 
 export async function getArticleBySlug(slug: string): Promise<Article | null> {
   try {
-    const supabase = await createClient()
+    const supabase = createStaticClient()
     const { data, error } = await supabase
       .from('articles')
       .select('*')
@@ -47,7 +47,7 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
 
 export async function getArticleSlugs(): Promise<{ slug: string }[]> {
   try {
-    const supabase = await createClient()
+    const supabase = createStaticClient()
     const { data, error } = await supabase
       .from('articles')
       .select('slug')
