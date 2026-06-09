@@ -47,8 +47,7 @@ export async function createBooking(
 
     const bookingCode = await generateBookingCode(supabase)
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const { error } = await supabase.from('bookings').insert({
+    const bookingPayload = {
       booking_code: bookingCode,
       patient_name: d.patientName,
       patient_phone: d.patientPhone,
@@ -59,7 +58,9 @@ export async function createBooking(
       booking_date: d.bookingDate,
       booking_time: d.bookingTime + ':00',
       status: 'pending',
-    } as any)
+    } as never
+
+    const { error } = await supabase.from('bookings').insert(bookingPayload)
 
     if (error) throw error
 

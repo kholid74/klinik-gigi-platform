@@ -17,7 +17,7 @@ export default async function PromoPage() {
   const activePromo = promos.find((p) => p.status === 'aktif')
   const nearestEndDate = activePromo?.end_date
     ? new Date(activePromo.end_date + 'T23:59:59').toISOString()
-    : new Date(Date.now() + 7 * 24 * 3600000).toISOString()
+    : '2026-06-30T23:59:59.000Z'
 
   return (
     <>
@@ -33,7 +33,7 @@ export default async function PromoPage() {
           <h1 className="font-display text-3xl md:text-4xl mb-2">
             Diskon hingga 40%<br className="hidden md:block" /> untuk Pasien Baru
           </h1>
-          <p className="text-white/80 text-sm mb-6">Berlaku untuk Scaling, Whitening, dan Pemeriksaan Awal.</p>
+          <p className="text-white/80 text-sm mb-6">Berlaku untuk Scaling, Whitening, dan Pemeriksaan Awal. Kuota promo mengikuti ketersediaan jadwal dokter dan akan dikonfirmasi admin setelah booking.</p>
 
           <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
             <div>

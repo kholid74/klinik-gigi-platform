@@ -46,7 +46,7 @@ export function AdminTable<T extends { id: string }>({
 
       {rows.length === 0 ? (
         <div className="py-12 text-center text-[var(--color-subtle)] text-sm">
-          Belum ada data. Klik "{newLabel}" untuk menambahkan.
+          Belum ada data. Klik &quot;{newLabel}&quot; untuk menambahkan.
         </div>
       ) : (
         <div className="overflow-x-auto">

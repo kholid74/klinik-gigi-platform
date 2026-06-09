@@ -9,10 +9,11 @@ export function AnnouncementBar() {
   if (!visible) return null
 
   return (
-    <div className="bg-[var(--color-brand-primary)] text-white text-sm py-2.5 px-4 text-center relative">
+    <div className="bg-[var(--color-brand-cta)] text-white text-sm py-2.5 px-4 text-center relative">
       <span>
-        🎉 Diskon 25% Scaling + Whitening untuk pasien baru!{' '}
-        <Link href="/promo" className="font-bold underline hover:no-underline">
+        🎉 <strong className="font-bold">Promo Aktif:</strong>{' '}
+        Scaling + Whitening — hemat sampai 25%. Kuota terbatas bulan ini.{' '}
+        <Link href="/promo" className="inline-flex items-center rounded-full bg-white px-4 py-1 text-xs font-bold text-[var(--color-brand-cta)] no-underline hover:bg-white/90">
           Klaim Sekarang
         </Link>
       </span>

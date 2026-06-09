@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { Menu, X, Calendar } from 'lucide-react'
 
 const NAV_LINKS = [
+  { href: '/', label: 'Beranda' },
   { href: '/tentang', label: 'Tentang' },
   { href: '/dokter', label: 'Dokter' },
   { href: '/layanan', label: 'Layanan' },
@@ -22,28 +23,28 @@ export function SiteNav() {
     href === '/' ? pathname === '/' : pathname.startsWith(href)
 
   return (
-    <nav className="sticky top-0 z-50 bg-white border-b border-[var(--color-border)] shadow-sm">
+    <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-[var(--color-border)] shadow-xs">
       <div className="container">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-[72px] gap-8">
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-2 font-bold text-lg text-[var(--color-brand-primary)] shrink-0"
+            className="flex items-center gap-2 text-xl text-[var(--color-brand-primary)] shrink-0"
           >
             <span className="text-2xl">🦷</span>
             <span className="font-display">Senyum Sehat</span>
           </Link>
 
           {/* Desktop nav */}
-          <ul className="hidden md:flex items-center gap-1">
+          <ul className="hidden lg:flex items-center justify-center gap-6 flex-1">
             {NAV_LINKS.map(({ href, label }) => (
               <li key={href}>
                 <Link
                   href={href}
-                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                  className={`py-2 text-base font-medium whitespace-nowrap transition-colors border-b-2 ${
                     isActive(href)
-                      ? 'text-[var(--color-brand-primary)] bg-[var(--color-brand-light)]'
-                      : 'text-[var(--color-muted)] hover:text-[var(--color-brand-primary)] hover:bg-[var(--color-brand-light)]'
+                      ? 'text-[var(--color-brand-primary)] border-[var(--color-brand-primary)] font-semibold'
+                      : 'text-[var(--color-muted)] border-transparent hover:text-[var(--color-brand-primary)]'
                   }`}
                 >
                   {label}
@@ -55,7 +56,7 @@ export function SiteNav() {
           {/* Desktop CTA */}
           <Link
             href="/booking"
-            className="hidden md:flex items-center gap-2 px-4 py-2 bg-[var(--color-brand-cta)] text-white text-sm font-semibold rounded-full hover:opacity-90 transition-opacity"
+            className="hidden lg:flex items-center gap-2 px-5 py-2.5 bg-[var(--color-brand-cta)] text-white text-sm font-bold rounded-lg hover:opacity-90 transition-opacity shadow-cta shrink-0"
           >
             <Calendar size={15} />
             Buat Janji
@@ -63,7 +64,7 @@ export function SiteNav() {
 
           {/* Mobile hamburger */}
           <button
-            className="md:hidden p-2 rounded-md text-[var(--color-muted)] hover:bg-[var(--color-surface)] transition-colors"
+            className="lg:hidden p-2 rounded-md text-[var(--color-muted)] hover:bg-[var(--color-surface-muted)] transition-colors"
             onClick={() => setMobileOpen((o) => !o)}
             aria-label={mobileOpen ? 'Tutup menu' : 'Buka menu'}
           >
@@ -73,7 +74,7 @@ export function SiteNav() {
 
         {/* Mobile menu */}
         {mobileOpen && (
-          <div className="md:hidden pb-4 border-t border-[var(--color-border)] pt-2">
+          <div className="lg:hidden pb-4 border-t border-[var(--color-border)] pt-2">
             <ul className="flex flex-col gap-1">
               {NAV_LINKS.map(({ href, label }) => (
                 <li key={href}>

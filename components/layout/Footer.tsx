@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { MapPin, Phone, Mail, Share2, Users, Play } from 'lucide-react'
+import { SITE_CONTACT } from '@/lib/site'
 
 const LAYANAN_LINKS = [
   { href: '/layanan', label: 'Semua Layanan' },
@@ -98,24 +99,24 @@ export function Footer() {
             <ul className="space-y-3">
               <li className="flex gap-3 text-sm text-white/70">
                 <MapPin size={16} className="shrink-0 mt-0.5 text-[var(--color-brand-secondary)]" />
-                Jl. Sudirman No. 45, Bandung 40117
+                {SITE_CONTACT.address}
               </li>
               <li>
                 <a
-                  href="tel:+62227890000"
+                  href={SITE_CONTACT.phoneHref}
                   className="flex gap-3 text-sm text-white/70 hover:text-white transition-colors"
                 >
                   <Phone size={16} className="shrink-0 mt-0.5 text-[var(--color-brand-secondary)]" />
-                  +62 22 7890-0000
+                  {SITE_CONTACT.phoneDisplay}
                 </a>
               </li>
               <li>
                 <a
-                  href="mailto:halo@senyumsehat.id"
+                  href={`mailto:${SITE_CONTACT.email}`}
                   className="flex gap-3 text-sm text-white/70 hover:text-white transition-colors"
                 >
                   <Mail size={16} className="shrink-0 mt-0.5 text-[var(--color-brand-secondary)]" />
-                  halo@senyumsehat.id
+                  {SITE_CONTACT.email}
                 </a>
               </li>
             </ul>
@@ -127,14 +128,15 @@ export function Footer() {
       <div className="border-t border-white/10">
         <div className="container py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
           <p className="text-xs text-white/40">
-            © {new Date().getFullYear()} Klinik Gigi Senyum Sehat. Hak Cipta Dilindungi.
+            © 2026 Klinik Gigi Senyum Sehat. Hak Cipta Dilindungi.
           </p>
           <div className="flex gap-4">
-            {['Kebijakan Privasi', 'Syarat & Ketentuan'].map((label) => (
-              <a key={label} href="#" className="text-xs text-white/40 hover:text-white/70 transition-colors">
-                {label}
-              </a>
-            ))}
+            <Link href="/privasi" className="text-xs text-white/40 hover:text-white/70 transition-colors">
+              Kebijakan Privasi
+            </Link>
+            <Link href="/syarat-ketentuan" className="text-xs text-white/40 hover:text-white/70 transition-colors">
+              Syarat & Ketentuan
+            </Link>
           </div>
         </div>
       </div>

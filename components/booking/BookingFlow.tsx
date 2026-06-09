@@ -5,11 +5,32 @@ import Image from 'next/image'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { ChevronLeft, ChevronRight, Check, AlertCircle, Calendar, Clock, User } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Check, AlertCircle, Calendar, Clock, User, Stethoscope, Sparkles, PlusSquare, Zap, GitCommit, Scissors, Sun, Layers, Anchor, Smile, Shield } from 'lucide-react'
 import type { Doctor, Service, TimeSlot } from '@/types'
 import { useBookingStore } from '@/lib/stores/booking-store'
 import { createBooking } from '@/lib/actions/booking'
 import { formatPrice } from '@/lib/utils'
+import { BOOKING_REASSURANCE } from '@/lib/site'
+
+const SERVICE_ICONS = {
+  stethoscope: Stethoscope,
+  sparkles: Sparkles,
+  'plus-square': PlusSquare,
+  zap: Zap,
+  'git-commit': GitCommit,
+  scissors: Scissors,
+  sun: Sun,
+  layers: Layers,
+  anchor: Anchor,
+  smile: Smile,
+  shield: Shield,
+  'alert-circle': AlertCircle,
+} as const
+
+function ServiceIcon({ name }: { name?: string | null }) {
+  const Icon = name ? SERVICE_ICONS[name as keyof typeof SERVICE_ICONS] : undefined
+  return Icon ? <Icon size={20} aria-hidden="true" /> : <span aria-hidden="true">🦷</span>
+}
 
 // ─── Step 1: Pilih Layanan ────────────────────────────────────────────────────
 
@@ -19,7 +40,13 @@ function StepService({ services }: { services: Service[] }) {
   return (
     <div>
       <h2 className="font-display text-xl text-[var(--color-foreground)] mb-1">Pilih Layanan</h2>
-      <p className="text-sm text-[var(--color-muted)] mb-6">Layanan apa yang Anda butuhkan hari ini?</p>
+      <p className="text-sm text-[var(--color-muted)] mb-4">Layanan apa yang Anda butuhkan hari ini?</p>
+      <div className="mb-5 rounded-2xl border border-[var(--color-brand-primary)]/20 bg-[var(--color-brand-light)] p-4">
+        <p className="text-sm font-semibold text-[var(--color-foreground)] mb-2">Belum yakin perlu layanan apa?</p>
+        <p className="text-xs leading-relaxed text-[var(--color-muted)]">
+          Pilih <strong>Pemeriksaan & Konsultasi</strong> terlebih dahulu. Dokter akan memeriksa kondisi gigi dan memberi estimasi biaya sebelum tindakan.
+        </p>
+      </div>
 
       <div className="grid sm:grid-cols-2 gap-3">
         {services.map((svc) => (
@@ -33,8 +60,8 @@ function StepService({ services }: { services: Service[] }) {
             }`}
           >
             <div className="flex items-start gap-3">
-              <div className="w-10 h-10 rounded-xl bg-[var(--color-brand-light)] flex items-center justify-center text-xl shrink-0">
-                {svc.icon_name ?? '🦷'}
+              <div className="w-10 h-10 rounded-xl bg-[var(--color-brand-light)] flex items-center justify-center text-[var(--color-brand-primary)] shrink-0">
+                <ServiceIcon name={svc.icon_name} />
               </div>
               <div className="flex-1 min-w-0">
                 <p className="font-semibold text-sm text-[var(--color-foreground)]">{svc.name}</p>
@@ -118,19 +145,28 @@ async function fetchSlots(doctorId: string, date: string): Promise<TimeSlot[]> {
 function StepSchedule() {
   const { selectedDoctor, selectedDate, selectedTime, setSchedule } = useBookingStore()
   const [date, setDate] = useState(selectedDate ?? '')
-  const [slots, setSlots] = useState<TimeSlot[]>([])
-  const [loading, setLoading] = useState(false)
+  const [slots, setSlots] = useState<TimeSlot[] | null>(null)
   const [pickedTime, setPickedTime] = useState<string | null>(selectedTime)
+  const [dateRange] = useState(() => {
+    const now = new Date()
+    const max = new Date(now)
+    max.setDate(max.getDate() + 30)
+    return {
+      today: now.toISOString().slice(0, 10),
+      maxDate: max.toISOString().slice(0, 10),
+    }
+  })
 
-  const today = new Date().toISOString().slice(0, 10)
-  const maxDate = new Date(Date.now() + 30 * 24 * 3600000).toISOString().slice(0, 10)
+  const loading = Boolean(date && selectedDoctor && slots === null)
 
   useEffect(() => {
     if (!date || !selectedDoctor) return
-    setLoading(true)
+    let cancelled = false
     fetchSlots(selectedDoctor.id, date)
-      .then(setSlots)
-      .finally(() => setLoading(false))
+      .then((nextSlots) => {
+        if (!cancelled) setSlots(nextSlots)
+      })
+    return () => { cancelled = true }
   }, [date, selectedDoctor])
 
   return (
@@ -145,10 +181,10 @@ function StepSchedule() {
         </label>
         <input
           type="date"
-          min={today}
-          max={maxDate}
+          min={dateRange.today}
+          max={dateRange.maxDate}
           value={date}
-          onChange={(e) => { setDate(e.target.value); setPickedTime(null) }}
+          onChange={(e) => { setDate(e.target.value); setPickedTime(null); setSlots(null) }}
           className="w-full px-4 py-3 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] text-sm focus:outline-none focus:border-[var(--color-brand-primary)]"
         />
       </div>
@@ -165,11 +201,11 @@ function StepSchedule() {
                 <div key={i} className="w-20 h-10 rounded-xl bg-[var(--color-border)] animate-pulse" />
               ))}
             </div>
-          ) : slots.length === 0 ? (
+          ) : (slots ?? []).length === 0 ? (
             <p className="text-sm text-[var(--color-muted)] py-4">Tidak ada slot tersedia di tanggal ini.</p>
           ) : (
             <div className="flex flex-wrap gap-2">
-              {slots.map((slot) => (
+              {(slots ?? []).map((slot) => (
                 <button
                   key={slot.time}
                   disabled={!slot.available}
@@ -333,7 +369,11 @@ function StepConfirm({ onError }: { onError: (msg: string) => void }) {
       </div>
 
       <div className="bg-[var(--color-brand-light)] border border-[var(--color-brand-primary)]/20 rounded-xl p-4 text-xs text-[var(--color-muted)] mb-6">
-        Dengan mengirim form ini, Anda menyetujui bahwa data akan digunakan untuk konfirmasi janji temu. Tim kami akan menghubungi Anda melalui WhatsApp untuk konfirmasi jadwal.
+        <p className="font-semibold text-[var(--color-foreground)] mb-2">Sebelum Anda mengirim:</p>
+        <ul className="space-y-1 list-disc pl-4">
+          {BOOKING_REASSURANCE.map((item) => <li key={item}>{item}</li>)}
+        </ul>
+        <p className="mt-3">Dengan mengirim form ini, Anda menyetujui data digunakan untuk konfirmasi janji temu.</p>
       </div>
 
       <button

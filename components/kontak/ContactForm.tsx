@@ -6,6 +6,7 @@ import { z } from 'zod'
 import { useState, useTransition } from 'react'
 import { Send, CheckCircle2, AlertCircle } from 'lucide-react'
 import { sendContactMessage } from '@/lib/actions/contact'
+import { SITE_CONTACT } from '@/lib/site'
 
 const schema = z.object({
   name: z.string().min(2, 'Nama minimal 2 karakter'),
@@ -69,6 +70,9 @@ export function ContactForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="bg-white rounded-2xl p-6 md:p-8 shadow-sm space-y-5">
       <h2 className="font-display text-xl text-[var(--color-foreground)]">Kirim Pesan</h2>
+      <p className="text-xs leading-relaxed text-[var(--color-muted)] -mt-3">
+        Untuk booking lebih cepat, gunakan tombol <strong>Buat Janji</strong>. {SITE_CONTACT.responseTime}
+      </p>
 
       {status === 'error' && (
         <div className="flex items-center gap-2 p-3 bg-red-50 rounded-xl text-sm text-red-600">

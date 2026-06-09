@@ -22,22 +22,23 @@ export async function sendContactMessage(
 
   try {
     const supabase = await createClient()
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const messagePayload = {
+      name: parsed.data.name,
+      email: parsed.data.email ?? null,
+      phone: parsed.data.phone ?? null,
+      subject: parsed.data.subject,
+      message: parsed.data.message,
+    } as never
+
     const { data, error } = await supabase
       .from('contact_messages')
-      .insert({
-        name: parsed.data.name,
-        email: parsed.data.email ?? null,
-        phone: parsed.data.phone ?? null,
-        subject: parsed.data.subject,
-        message: parsed.data.message,
-      } as any)
+      .insert(messagePayload)
       .select('id')
       .single()
 
     if (error) throw error
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return { data: { id: (data as any).id } }
+    const message = data as { id: string }
+    return { data: { id: message.id } }
   } catch {
     return { error: 'Gagal mengirim pesan. Silakan coba lagi atau hubungi via WhatsApp.' }
   }

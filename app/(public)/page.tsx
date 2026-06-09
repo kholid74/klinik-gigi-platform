@@ -1,15 +1,15 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Calendar, ChevronRight, Star, Users, Award, Clock, MapPin, Phone, MessageCircle } from 'lucide-react'
+import { Calendar, ChevronRight, Award, Clock, MapPin, Phone, MessageCircle } from 'lucide-react'
 import { getDoctors } from '@/lib/queries/doctors'
 import { getServices } from '@/lib/queries/services'
 import { getPromos } from '@/lib/queries/promos'
 import { getArticles } from '@/lib/queries/articles'
 import { formatPrice, formatDate } from '@/lib/utils'
 import { Badge } from '@/components/ui/Badge'
-import { AnnouncementBar } from '@/components/home/AnnouncementBar'
 import { InsuranceChips } from '@/components/kontak/InsuranceChips'
+import { SITE_CONTACT } from '@/lib/site'
 
 export const metadata: Metadata = {
   title: 'Klinik Gigi Senyum Sehat Bandung',
@@ -41,8 +41,6 @@ export default async function HomePage() {
 
   return (
     <>
-      <AnnouncementBar />
-
       {/* ── HERO ───────────────────────────────────────── */}
       <section
         className="relative flex items-end overflow-hidden"
@@ -61,11 +59,11 @@ export default async function HomePage() {
             className="font-display text-white mb-5"
             style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', lineHeight: 1.2 }}
           >
-            Klinik Gigi Keluarga Anda,<br />Tersedia 24 Jam
+            Klinik Gigi Keluarga di Bandung,<br />Booking Online Mudah
           </h1>
           <p className="text-white/85 text-lg mb-8 leading-relaxed max-w-xl">
-            Dokter gigi berpengalaman, booking online mudah, harga transparan.
-            Dipercaya lebih dari 10 tahun melayani keluarga Indonesia.
+            Pilih layanan, cek estimasi biaya, dan buat janji dengan dokter gigi
+            berpengalaman untuk anak hingga dewasa.
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
             <Link
@@ -232,7 +230,7 @@ export default async function HomePage() {
                   style={{ background: 'linear-gradient(135deg, var(--color-brand-light) 0%, var(--color-brand-secondary) 100%)' }}
                 >
                   {doc.photo_url ? (
-                    <Image src={doc.photo_url} alt={doc.name} fill className="object-cover object-top" sizes="(max-width: 1024px) 280px, 33vw" />
+                    <Image src={doc.photo_url} alt={doc.name} fill className="object-cover object-top" sizes="(max-width: 1024px) 280px, 33vw" loading="eager" />
                   ) : (
                     <div className="absolute inset-0 flex items-center justify-center">
                       <div className="w-24 h-24 rounded-full bg-white/30 flex items-center justify-center font-display text-5xl text-white">
@@ -302,6 +300,7 @@ export default async function HomePage() {
                       alt={article.title}
                       fill
                       sizes="(max-width: 768px) 100vw, 33vw"
+                      loading="eager"
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   ) : (
@@ -340,17 +339,17 @@ export default async function HomePage() {
               {
                 icon: MapPin,
                 label: 'Alamat Klinik',
-                value: 'Jl. Sudirman No. 45, Bandung 40117',
+                value: SITE_CONTACT.address,
               },
               {
                 icon: Clock,
                 label: 'Jam Operasional',
-                value: 'Senin – Sabtu: 08.00 – 20.00',
+                value: SITE_CONTACT.hoursShort,
               },
               {
                 icon: Phone,
                 label: 'Hubungi Kami',
-                value: '+62 22 7890-0000',
+                value: SITE_CONTACT.phoneDisplay,
               },
             ].map(({ icon: Icon, label, value }) => (
               <div key={label} className="flex items-start gap-3">
@@ -417,7 +416,7 @@ export default async function HomePage() {
 
       {/* ── WHATSAPP FAB ───────────────────────────────── */}
       <a
-        href="https://wa.me/6222789000"
+        href={SITE_CONTACT.whatsappHref}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat via WhatsApp"
