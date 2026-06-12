@@ -480,7 +480,7 @@ export function BookingFlow({ services, doctors }: { services: Service[]; doctor
 
           <button
             onClick={handleNext}
-            disabled={!canGoNext() && step !== 4}
+            disabled={step < 4 && !canGoNext()}
             className="flex items-center gap-1.5 px-6 py-2.5 bg-[var(--color-brand-primary)] text-white text-sm font-bold rounded-full hover:opacity-90 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed"
           >
             {step === 4 ? 'Lanjut ke Konfirmasi' : 'Lanjutkan'}

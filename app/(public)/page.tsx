@@ -515,17 +515,24 @@ export default async function HomePage() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat via WhatsApp"
-        className="fixed bottom-20 right-4 w-14 h-14 rounded-full flex items-center justify-center text-white text-2xl z-50 hover:scale-110 transition-transform"
-        style={{ background: '#25D366', boxShadow: '0 8px 24px rgba(37,211,102,0.4)' }}
+        className="fixed right-4 w-14 h-14 rounded-full flex items-center justify-center text-white text-2xl z-50 hover:scale-110 transition-transform md:bottom-6"
+        style={{
+          background: '#25D366',
+          boxShadow: '0 8px 24px rgba(37,211,102,0.4)',
+          bottom: 'max(80px, calc(80px + env(safe-area-inset-bottom, 0px)))',
+        }}
       >
         <MessageCircle size={26} />
       </a>
 
       {/* ── MOBILE BOOKING BAR ─────────────────────────── */}
-      <div className="fixed bottom-0 left-0 right-0 md:hidden bg-white border-t border-[var(--color-border)] p-3 z-40">
+      <div
+        className="fixed bottom-0 left-0 right-0 md:hidden bg-white border-t border-[var(--color-border)] px-3 pt-3 z-40"
+        style={{ paddingBottom: 'max(12px, env(safe-area-inset-bottom, 12px))' }}
+      >
         <Link
           href="/booking"
-          className="flex items-center justify-center gap-2 w-full py-3 bg-[var(--color-brand-cta)] text-white font-bold rounded-lg"
+          className="flex items-center justify-center gap-2 w-full py-3 bg-[var(--color-brand-cta)] text-white font-bold rounded-full"
           style={{ boxShadow: '0 4px 16px rgba(232,85,62,0.35)' }}
         >
           <Calendar size={18} />
