@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 }
 
 const STATS = [
-  { value: '500+', label: 'Pasien Puas' },
+  { value: '3.000+', label: 'Pasien Puas' },
   { value: '6', label: 'Dokter Spesialis' },
   { value: '12+', label: 'Layanan Tersedia' },
   { value: '10+', label: 'Tahun Pengalaman' },

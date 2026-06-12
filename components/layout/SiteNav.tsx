@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 import { Menu, X, Calendar } from 'lucide-react'
+import { ToothIcon } from '@/components/ui/ToothIcon'
 
 const NAV_LINKS = [
   { href: '/', label: 'Beranda' },
@@ -31,7 +32,7 @@ export function SiteNav() {
             href="/"
             className="flex items-center gap-2 text-xl text-[var(--color-brand-primary)] shrink-0"
           >
-            <span className="text-2xl">🦷</span>
+            <ToothIcon size={26} className="text-[var(--color-brand-primary)]" />
             <span className="font-display">Senyum Sehat</span>
           </Link>
 

@@ -18,6 +18,33 @@ export const metadata: Metadata = {
 
 export const revalidate = 60
 
+const TESTIMONIALS = [
+  {
+    name: 'Rizky Pratama',
+    location: 'Bandung',
+    text: 'Dokternya sabar dan profesional. Cabut gigi bungsu yang saya bayangkan menakutkan ternyata lancar dan hampir tidak sakit. Sangat direkomendasikan!',
+    service: 'Bedah Gigi Bungsu',
+    initial: 'R',
+    avatarBg: 'bg-[var(--color-brand-primary)]',
+  },
+  {
+    name: 'Sari Dewi',
+    location: 'Cimahi',
+    text: 'Booking online mudah dan admin responsif via WhatsApp. Klinik bersih dan modern. Anak saya yang tadinya takut dokter gigi, sekarang sudah mau!',
+    service: 'Perawatan Anak',
+    initial: 'S',
+    avatarBg: 'bg-[var(--color-brand-secondary)]',
+  },
+  {
+    name: 'Hendra Wijaya',
+    location: 'Bandung Barat',
+    text: 'Whitening hasilnya memuaskan. Penjelasan dokter jelas sebelum tindakan, dan harga sesuai yang dijanjikan. Tidak ada biaya tersembunyi sama sekali.',
+    service: 'Teeth Whitening',
+    initial: 'H',
+    avatarBg: 'bg-[#005f63]',
+  },
+]
+
 const INSURANCE = [
   { name: 'BPJS Kesehatan', domain: 'bpjs-kesehatan.go.id', type: 'Jaminan Kesehatan Nasional' },
   { name: 'Prudential', domain: 'prudential.com', type: 'Asuransi Jiwa & Kesehatan' },
@@ -42,74 +69,100 @@ export default async function HomePage() {
   return (
     <>
       {/* ── HERO ───────────────────────────────────────── */}
-      <section
-        className="relative flex items-end overflow-hidden"
-        style={{
-          minHeight: 'calc(100vh - 72px)',
-          backgroundImage: `
-            linear-gradient(to bottom, rgba(13,115,119,0.15) 0%, rgba(13,115,119,0.82) 100%),
-            url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1400&q=80')
-          `,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      >
-        <div className="container relative z-10 pb-16 pt-12">
-          <h1
-            className="font-display text-white mb-5"
-            style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', lineHeight: 1.2 }}
-          >
-            Klinik Gigi Keluarga di Bandung,<br />Booking Online Mudah
-          </h1>
-          <p className="text-white/85 text-lg mb-8 leading-relaxed max-w-xl">
-            Pilih layanan, cek estimasi biaya, dan buat janji dengan dokter gigi
-            berpengalaman untuk anak hingga dewasa.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3">
-            <Link
-              href="/booking"
-              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-[var(--color-brand-cta)] text-white font-bold rounded-lg hover:opacity-90 transition-opacity text-base"
-              style={{ boxShadow: '0 4px 16px rgba(232,85,62,0.35)' }}
-            >
-              <Calendar size={18} />
-              Booking Sekarang
-            </Link>
-            <Link
-              href="/layanan"
-              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-transparent text-white font-bold rounded-lg border-2 border-white/70 hover:bg-white/15 transition-colors text-base"
-            >
-              Lihat Layanan
-              <ChevronRight size={16} />
-            </Link>
-          </div>
-        </div>
-      </section>
+      <section className="relative overflow-hidden bg-[var(--color-brand-cream)]">
+        {/* Decorative bg blobs */}
+        <div
+          className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full pointer-events-none"
+          style={{ background: 'radial-gradient(circle, rgba(13,115,119,0.07) 0%, transparent 70%)' }}
+        />
+        <div
+          className="absolute bottom-0 left-0 w-80 h-80 rounded-full pointer-events-none"
+          style={{ background: 'radial-gradient(circle, rgba(20,189,172,0.06) 0%, transparent 70%)' }}
+        />
 
-      {/* ── TRUST STRIP ────────────────────────────────── */}
-      <section className="bg-[var(--color-brand-light)] py-8">
-        <div className="container">
-          <div className="flex flex-col md:flex-row items-center justify-around gap-6 text-center">
-            {[
-              { value: '4.9 ★', label: 'Google Rating' },
-              { value: '10+', label: 'Tahun Melayani' },
-              { value: '6', label: 'Dokter Spesialis' },
-              { value: '3.000+', label: 'Pasien Puas' },
-            ].map((item, i) => (
-              <div key={item.label} className="flex items-center gap-6">
-                <div>
-                  <div
-                    className="font-display text-[var(--color-brand-primary)] leading-none mb-1"
-                    style={{ fontSize: 'var(--text-3xl, 2rem)' }}
-                  >
-                    {item.value}
-                  </div>
-                  <div className="text-sm text-[var(--color-muted)] font-medium">{item.label}</div>
-                </div>
-                {i < 3 && (
-                  <div className="hidden md:block w-px h-12 bg-[#CBD5E0]" />
-                )}
+        <div className="container relative z-10">
+          <div className="grid lg:grid-cols-2 gap-10 items-center py-16 md:py-24 lg:py-28">
+
+            {/* Left: content */}
+            <div>
+              <span className="inline-flex items-center gap-2 bg-[var(--color-brand-light)] text-[var(--color-brand-primary)] text-xs font-bold px-3 py-1.5 rounded-full mb-6">
+                <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-brand-secondary)] animate-pulse" />
+                Buka Hari Ini · Senin – Sabtu
+              </span>
+
+              <h1
+                className="font-display text-[var(--color-foreground)] mb-5"
+                style={{ fontSize: 'clamp(2.25rem, 5vw, 3.75rem)', lineHeight: 1.1 }}
+              >
+                Klinik Gigi Keluarga<br />di Bandung.
+              </h1>
+
+              <p className="text-[var(--color-muted)] text-lg mb-8 leading-relaxed max-w-md">
+                Pilih layanan, cek estimasi biaya, dan buat janji dengan dokter gigi
+                berpengalaman — untuk anak hingga dewasa.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-3 mb-10">
+                <Link
+                  href="/booking"
+                  className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-[var(--color-brand-cta)] text-white font-bold rounded-lg hover:opacity-90 transition-opacity text-base"
+                  style={{ boxShadow: '0 4px 16px rgba(232,85,62,0.35)' }}
+                >
+                  <Calendar size={18} />
+                  Booking Sekarang
+                </Link>
+                <Link
+                  href="/layanan"
+                  className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-white text-[var(--color-foreground)] font-semibold rounded-lg border border-[var(--color-border)] hover:border-[var(--color-brand-primary)] hover:text-[var(--color-brand-primary)] transition-colors text-base"
+                >
+                  Lihat Layanan
+                  <ChevronRight size={16} />
+                </Link>
               </div>
-            ))}
+
+              {/* Mini trust strip */}
+              <div className="flex items-center gap-5 text-sm flex-wrap">
+                <div className="flex items-center gap-1.5">
+                  <span className="text-amber-400 text-base leading-none">★</span>
+                  <span className="font-bold text-[var(--color-foreground)]">4.9</span>
+                  <span className="text-[var(--color-muted)]">Google</span>
+                </div>
+                <div className="w-px h-4 bg-[var(--color-border)]" />
+                <div className="flex items-center gap-1">
+                  <span className="font-bold text-[var(--color-foreground)]">10+</span>
+                  <span className="text-[var(--color-muted)]">Tahun Pengalaman</span>
+                </div>
+                <div className="w-px h-4 bg-[var(--color-border)]" />
+                <div className="flex items-center gap-1">
+                  <span className="font-bold text-[var(--color-foreground)]">3.000+</span>
+                  <span className="text-[var(--color-muted)]">Pasien Puas</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: hero image with organic blob shape */}
+            <div className="relative hidden lg:flex justify-end items-center">
+              {/* Accent ring behind image */}
+              <div
+                className="absolute top-8 right-8 w-[420px] h-[500px] border-2 border-[var(--color-brand-secondary)]/20"
+                style={{ borderRadius: '55% 45% 38% 62% / 46% 52% 48% 54%' }}
+              />
+              {/* Image blob */}
+              <div
+                className="relative w-[400px] h-[480px] overflow-hidden"
+                style={{ borderRadius: '60% 40% 32% 68% / 44% 50% 50% 56%' }}
+              >
+                <Image
+                  src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=800&q=80"
+                  alt="Dokter Gigi Senyum Sehat Bandung"
+                  fill
+                  className="object-cover object-top"
+                  sizes="400px"
+                  priority
+                />
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
@@ -238,10 +291,6 @@ export default async function HomePage() {
                       </div>
                     </div>
                   )}
-                  <div className="absolute bottom-2.5 left-2.5 flex items-center gap-1.5 bg-green-600/90 text-white text-xs font-semibold px-2.5 py-1 rounded-full">
-                    <span className="w-1.5 h-1.5 rounded-full bg-green-300" />
-                    Tersedia
-                  </div>
                 </div>
                 <div className="p-4 flex flex-col gap-2">
                   <Badge variant="default">{doc.specialty}</Badge>
@@ -265,6 +314,41 @@ export default async function HomePage() {
           <Link href="/dokter" className="flex md:hidden items-center justify-center gap-1 mt-4 text-sm font-semibold text-[var(--color-brand-primary)]">
             Semua Dokter <ChevronRight size={16} />
           </Link>
+        </div>
+      </section>
+
+      {/* ── TESTIMONIALS ───────────────────────────────── */}
+      <section className="py-16 bg-[var(--color-brand-light)]">
+        <div className="container">
+          <div className="text-center mb-10">
+            <p className="text-xs font-bold text-[var(--color-brand-primary)] uppercase tracking-widest mb-2 bg-white inline-block px-3 py-1 rounded-full">
+              Testimoni
+            </p>
+            <h2 className="font-display mt-2" style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)', color: 'var(--color-foreground)' }}>
+              Dipercaya Ribuan Pasien
+            </h2>
+            <p className="text-[var(--color-muted)] mt-1">Apa kata mereka tentang layanan kami</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {TESTIMONIALS.map((t) => (
+              <div key={t.name} className="bg-white rounded-2xl p-6 shadow-sm border border-[var(--color-border)] flex flex-col gap-4">
+                <div className="flex gap-0.5 text-amber-400 text-base">
+                  {'★★★★★'}
+                </div>
+                <p className="text-sm text-[var(--color-muted)] leading-relaxed flex-1">"{t.text}"</p>
+                <div className="flex items-center gap-3 pt-3 border-t border-[var(--color-border)]">
+                  <div className={`w-9 h-9 rounded-full flex items-center justify-center text-white text-sm font-bold shrink-0 ${t.avatarBg}`}>
+                    {t.initial}
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-[var(--color-foreground)]">{t.name}</p>
+                    <p className="text-xs text-[var(--color-muted)]">{t.location} · {t.service}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -293,7 +377,7 @@ export default async function HomePage() {
                 href={`/edukasi/${article.slug}`}
                 className="bg-white rounded-xl border border-[var(--color-border)] overflow-hidden hover:shadow-md transition-shadow group"
               >
-                <div className="h-40 bg-gradient-to-br from-[#e0f2f1] to-[#b2dfdb] relative overflow-hidden">
+                <div className="h-52 bg-gradient-to-br from-[#e0f2f1] to-[#b2dfdb] relative overflow-hidden">
                   {article.thumbnail_url ? (
                     <Image
                       src={article.thumbnail_url}

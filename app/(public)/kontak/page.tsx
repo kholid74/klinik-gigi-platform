@@ -114,15 +114,18 @@ export default function KontakPage() {
                 </p>
               </div>
 
-              {/* Map embed placeholder */}
-              <div className="bg-[var(--color-brand-light)] rounded-2xl overflow-hidden h-56 flex items-center justify-center">
-                <div className="text-center text-[var(--color-muted)]">
-                  <MapPin size={32} className="mx-auto mb-2 text-[var(--color-brand-primary)]" />
-                  <p className="text-sm font-semibold">{SITE_CONTACT.address}</p>
-                  <a href={SITE_CONTACT.mapsHref} target="_blank" rel="noopener noreferrer" className="text-xs font-semibold text-[var(--color-brand-primary)] hover:underline">
-                    Buka di Google Maps
-                  </a>
-                </div>
+              {/* Map embed */}
+              <div className="rounded-2xl overflow-hidden h-56 border border-[var(--color-border)]">
+                <iframe
+                  title="Lokasi Klinik Gigi Senyum Sehat"
+                  src="https://maps.google.com/maps?q=Jl.+Sudirman,+Bandung&output=embed&z=15"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  loading="lazy"
+                  allowFullScreen
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
               </div>
             </div>
 

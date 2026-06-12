@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { MapPin, Phone, Mail, Share2, Users, Play } from 'lucide-react'
 import { SITE_CONTACT } from '@/lib/site'
+import { ToothIcon } from '@/components/ui/ToothIcon'
 
 const LAYANAN_LINKS = [
   { href: '/layanan', label: 'Semua Layanan' },
@@ -27,7 +28,7 @@ export function Footer() {
           {/* Brand */}
           <div>
             <Link href="/" className="flex items-center gap-2 font-bold text-lg mb-4">
-              <span className="text-2xl">🦷</span>
+              <ToothIcon size={26} className="text-[var(--color-brand-secondary)]" />
               <span className="font-display text-[var(--color-brand-secondary)]">
                 Senyum Sehat
               </span>
@@ -37,14 +38,16 @@ export function Footer() {
             </p>
             <div className="flex gap-3">
               {[
-                { icon: Share2, href: '#', label: 'Instagram' },
-                { icon: Users, href: '#', label: 'Facebook' },
-                { icon: Play, href: '#', label: 'YouTube' },
+                { icon: Share2, href: 'https://instagram.com/senyumsehatid', label: 'Instagram' },
+                { icon: Users, href: 'https://facebook.com/senyumsehatid', label: 'Facebook' },
+                { icon: Play, href: 'https://youtube.com/@senyumsehatid', label: 'YouTube' },
               ].map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
                   href={href}
                   aria-label={label}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-9 h-9 rounded-full bg-white/10 hover:bg-[var(--color-brand-secondary)] flex items-center justify-center transition-colors"
                 >
                   <Icon size={16} />
