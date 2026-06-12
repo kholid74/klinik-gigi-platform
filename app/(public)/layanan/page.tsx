@@ -19,6 +19,7 @@ export default async function LayananPage() {
         title="Layanan Kami"
         subtitle="Perawatan gigi lengkap dalam satu klinik — ditangani dokter spesialis dengan teknologi modern."
         breadcrumb={[{ label: 'Beranda', href: '/' }, { label: 'Layanan', href: '/layanan' }]}
+        accent="dots"
       />
 
       <section className="py-12 bg-[var(--color-surface)]">

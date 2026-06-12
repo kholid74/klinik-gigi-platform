@@ -19,6 +19,8 @@ export default async function EdukasiPage() {
         title="Edukasi Kesehatan Gigi"
         subtitle="Tips, panduan, dan informasi kesehatan gigi dari para dokter kami untuk membantu Anda menjaga senyum terbaik."
         breadcrumb={[{ label: 'Beranda', href: '/' }, { label: 'Edukasi', href: '/edukasi' }]}
+        gradient="linear-gradient(135deg, #0D7377 0%, #059669 100%)"
+        accent="wave"
       />
 
       <section className="py-12 bg-[var(--color-surface)]">

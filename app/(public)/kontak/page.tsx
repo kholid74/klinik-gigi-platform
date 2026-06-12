@@ -28,6 +28,8 @@ export default function KontakPage() {
         title="Hubungi Kami"
         subtitle="Ada pertanyaan atau ingin membuat janji? Tim kami siap membantu Anda."
         breadcrumb={[{ label: 'Beranda', href: '/' }, { label: 'Kontak', href: '/kontak' }]}
+        gradient="linear-gradient(135deg, #1A365D 0%, #0D7377 100%)"
+        accent="circle"
       />
 
       <section className="py-12 bg-[var(--color-surface)]">

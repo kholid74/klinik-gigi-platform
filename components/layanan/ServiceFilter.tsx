@@ -1,13 +1,23 @@
 'use client'
 
 import { useState } from 'react'
-import { Clock, ChevronRight } from 'lucide-react'
+import { Clock, ChevronRight, Shield, Wrench, GitCommit, Scissors, Sparkles, Smile, Zap, Stethoscope } from 'lucide-react'
 import Link from 'next/link'
 import type { Service, ServiceCategory } from '@/types'
 import { TabBar } from '@/components/ui/TabBar'
 import { Badge } from '@/components/ui/Badge'
 import { ServiceSheet } from './ServiceSheet'
 import { SERVICE_CATEGORIES } from '@/lib/utils'
+
+const CATEGORY_ICONS: Record<ServiceCategory, React.ElementType> = {
+  preventif: Shield,
+  restoratif: Wrench,
+  ortodonti: GitCommit,
+  bedah: Scissors,
+  estetik: Sparkles,
+  anak: Smile,
+  darurat: Zap,
+}
 
 function formatPrice(min: number | null, max: number | null): string {
   if (!min && !max) return 'Hubungi klinik'
@@ -32,9 +42,7 @@ export function ServiceFilter({ services }: { services: Service[] }) {
             <div>
               <div className="flex items-start justify-between mb-3">
                 <div className="w-12 h-12 rounded-xl bg-[var(--color-brand-light)] flex items-center justify-center text-[var(--color-brand-primary)]">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                  </svg>
+                  {(() => { const Icon = CATEGORY_ICONS[svc.category] ?? Stethoscope; return <Icon size={22} /> })()}
                 </div>
                 <Badge variant="muted" className="capitalize text-[10px]">{svc.category}</Badge>
               </div>

@@ -1,7 +1,18 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Calendar, ChevronRight, Award, Clock, MapPin, Phone, MessageCircle } from 'lucide-react'
+import { Calendar, ChevronRight, Award, Clock, MapPin, Phone, MessageCircle, Shield, Wrench, GitCommit, Scissors, Sparkles, Smile, Zap, Stethoscope } from 'lucide-react'
+import type { ServiceCategory } from '@/types'
+
+const CATEGORY_ICONS: Record<ServiceCategory, React.ElementType> = {
+  preventif: Shield,
+  restoratif: Wrench,
+  ortodonti: GitCommit,
+  bedah: Scissors,
+  estetik: Sparkles,
+  anak: Smile,
+  darurat: Zap,
+}
 import { getDoctors } from '@/lib/queries/doctors'
 import { getServices } from '@/lib/queries/services'
 import { getPromos } from '@/lib/queries/promos'
@@ -105,7 +116,7 @@ export default async function HomePage() {
               <div className="flex flex-col sm:flex-row gap-3 mb-10">
                 <Link
                   href="/booking"
-                  className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-[var(--color-brand-cta)] text-white font-bold rounded-lg hover:opacity-90 transition-opacity text-base"
+                  className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-[var(--color-brand-cta)] text-white font-bold rounded-full hover:opacity-90 transition-opacity text-base"
                   style={{ boxShadow: '0 4px 16px rgba(232,85,62,0.35)' }}
                 >
                   <Calendar size={18} />
@@ -113,7 +124,7 @@ export default async function HomePage() {
                 </Link>
                 <Link
                   href="/layanan"
-                  className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-white text-[var(--color-foreground)] font-semibold rounded-lg border border-[var(--color-border)] hover:border-[var(--color-brand-primary)] hover:text-[var(--color-brand-primary)] transition-colors text-base"
+                  className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-white text-[var(--color-foreground)] font-semibold rounded-full border border-[var(--color-border)] hover:border-[var(--color-brand-primary)] hover:text-[var(--color-brand-primary)] transition-colors text-base"
                 >
                   Lihat Layanan
                   <ChevronRight size={16} />
@@ -175,7 +186,7 @@ export default async function HomePage() {
               <p className="text-xs font-bold text-[var(--color-brand-primary)] uppercase tracking-widest mb-2 bg-[var(--color-brand-light)] inline-block px-3 py-1 rounded-full">
                 Layanan Kami
               </p>
-              <h2 className="font-display mt-2" style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)', color: 'var(--color-foreground)' }}>
+              <h2 className="text-section-title mt-2">
                 Perawatan Lengkap untuk Senyum Terbaik
               </h2>
             </div>
@@ -192,7 +203,7 @@ export default async function HomePage() {
                 className="bg-white rounded-xl p-5 border border-[var(--color-border)] hover:border-[var(--color-brand-secondary)] hover:shadow-md transition-all group flex flex-col gap-3"
               >
                 <div className="w-11 h-11 rounded-lg bg-[var(--color-brand-light)] flex items-center justify-center text-[var(--color-brand-secondary)] group-hover:bg-[var(--color-brand-primary)] group-hover:text-white transition-colors">
-                  <Award size={20} />
+                  {(() => { const Icon = CATEGORY_ICONS[svc.category] ?? Stethoscope; return <Icon size={20} /> })()}
                 </div>
                 <div>
                   <h3 className="font-semibold text-[var(--color-foreground)] text-sm mb-1">{svc.name}</h3>
@@ -240,7 +251,7 @@ export default async function HomePage() {
               </div>
               <Link
                 href="/booking"
-                className="shrink-0 inline-flex items-center gap-2 px-6 py-3 bg-white text-[var(--color-brand-primary)] text-sm font-bold rounded-lg hover:scale-[1.03] transition-transform"
+                className="shrink-0 inline-flex items-center gap-2 px-6 py-3 bg-white text-[var(--color-brand-primary)] text-sm font-bold rounded-full hover:scale-[1.03] transition-transform"
               >
                 <Calendar size={16} />
                 Klaim Sekarang
@@ -251,14 +262,14 @@ export default async function HomePage() {
       )}
 
       {/* ── DOCTORS ────────────────────────────────────── */}
-      <section className="py-16 bg-[var(--color-surface)]">
+      <section className="py-16 bg-[var(--color-brand-cream)]">
         <div className="container">
           <div className="flex items-end justify-between mb-10">
             <div>
               <p className="text-xs font-bold text-[var(--color-brand-primary)] uppercase tracking-widest mb-2 bg-[var(--color-brand-light)] inline-block px-3 py-1 rounded-full">
                 Tim Dokter
               </p>
-              <h2 className="font-display mt-2" style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)', color: 'var(--color-foreground)' }}>
+              <h2 className="text-section-title mt-2">
                 Ditangani Dokter Berpengalaman
               </h2>
             </div>
@@ -324,7 +335,7 @@ export default async function HomePage() {
             <p className="text-xs font-bold text-[var(--color-brand-primary)] uppercase tracking-widest mb-2 bg-white inline-block px-3 py-1 rounded-full">
               Testimoni
             </p>
-            <h2 className="font-display mt-2" style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)', color: 'var(--color-foreground)' }}>
+            <h2 className="text-section-title mt-2">
               Dipercaya Ribuan Pasien
             </h2>
             <p className="text-[var(--color-muted)] mt-1">Apa kata mereka tentang layanan kami</p>
@@ -360,7 +371,7 @@ export default async function HomePage() {
               <p className="text-xs font-bold text-[var(--color-brand-primary)] uppercase tracking-widest mb-2 bg-[var(--color-brand-light)] inline-block px-3 py-1 rounded-full">
                 Edukasi
               </p>
-              <h2 className="font-display mt-2" style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)', color: 'var(--color-foreground)' }}>
+              <h2 className="text-section-title mt-2">
                 Edukasi Kesehatan Gigi
               </h2>
               <p className="text-[var(--color-muted)] text-lg mt-1">Artikel dari dokter kami untuk keluarga Indonesia</p>
@@ -416,7 +427,7 @@ export default async function HomePage() {
       </section>
 
       {/* ── CONTACT STRIP ──────────────────────────────── */}
-      <section className="py-10 bg-white border-t border-[var(--color-border)]">
+      <section className="py-10 bg-[var(--color-brand-cream)] border-t border-[var(--color-border)]">
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
@@ -482,7 +493,7 @@ export default async function HomePage() {
           <div className="flex flex-wrap justify-center gap-3">
             <Link
               href="/booking"
-              className="inline-flex items-center gap-2 px-8 py-3.5 bg-[var(--color-brand-cta)] text-white font-bold rounded-lg hover:opacity-90 transition-opacity"
+              className="inline-flex items-center gap-2 px-8 py-3.5 bg-[var(--color-brand-cta)] text-white font-bold rounded-full hover:opacity-90 transition-opacity"
               style={{ boxShadow: '0 4px 16px rgba(232,85,62,0.35)' }}
             >
               <Calendar size={18} />
@@ -490,7 +501,7 @@ export default async function HomePage() {
             </Link>
             <Link
               href="/kontak"
-              className="inline-flex items-center gap-2 px-8 py-3.5 bg-white/15 text-white font-semibold rounded-lg hover:bg-white/25 transition-colors border border-white/30"
+              className="inline-flex items-center gap-2 px-8 py-3.5 bg-white/15 text-white font-semibold rounded-full hover:bg-white/25 transition-colors border border-white/30"
             >
               Hubungi Kami
             </Link>

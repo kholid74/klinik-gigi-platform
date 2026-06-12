@@ -53,6 +53,8 @@ export default function TentangPage() {
         title="Tentang Senyum Sehat"
         subtitle="Melayani kesehatan gigi masyarakat Bandung dengan tulus dan profesional sejak 2013."
         breadcrumb={[{ label: 'Beranda', href: '/' }, { label: 'Tentang', href: '/tentang' }]}
+        gradient="linear-gradient(135deg, #0D7377 0%, #14BDAC 100%)"
+        accent="rings"
       />
 
       {/* Mission */}
